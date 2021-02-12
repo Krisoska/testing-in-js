@@ -64,9 +64,9 @@ it("Snapshot should be kept up to date", () => {
   expect(container.firstChild).toMatchInlineSnapshot(`
       <div>
         Snapshot test
-        <div>
+        <span>
           the updated snapshot
-        </div>
+        </span>
       </div>
     `)
 })

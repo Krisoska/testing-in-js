@@ -1,7 +1,9 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from "@testing-library/user-event";
-import App, {difference, division, exponentiation, getDate, product, sum} from './App';
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import userEvent from "@testing-library/user-event"
+import App from './App'
+import {sum, difference, division, exponentiation, getDate} from './helpers'
+import {product} from "../0-warmup/functions"
 
 /**
  * Dette testsettet er ment å vise hvordan man kan forsikre typesikkerhet gjennom testing i JavaScript.
@@ -12,11 +14,6 @@ import App, {difference, division, exponentiation, getDate, product, sum} from '
  * Kjør følgende kommando i din terminal for å starte:
  * npm run test:watch 6-types
  */
-
-/**
- * For å kunne teste funksjonen vår, er vi nødt til å wrappe den i et jest.fn()-kall, slik vi ser under.
- */
-const calculateCall = jest.fn((a, b) => sum(a, b))
 
 /**
  * For å kunne teste funksjonen vår, er vi nødt til å wrappe den i et jest.fn()-kall, slik vi ser under.
@@ -32,7 +29,8 @@ const getDateCall = jest.fn(() => getDate())
  * Her sjekker vi at funksjonen har blitt kalt i det hele tatt.
  */
 it('calc-function has been called', () => {
-  render(<App calcSum={calcSumCall} />)
+  // Vi sender inn det mockete funksjonskallet
+  render(<App calculateSum={calcSumCall} />)
   const calcButton = screen.getByText(/calculate!/)
   userEvent.click(calcButton)
   expect(calcSumCall).toHaveBeenCalled()
@@ -78,7 +76,7 @@ it('calc-function returns the expected value', () => {
  * Disse resultatene skal vises på siden, og skal ha riktige typer og verdier.
  * Skriv en test for dette, og utvid applikasjonen.
  */
-it('calc-function returns multiple expected values', () => {
+it('calc-function calculates multiple expected values', () => {
   render(<App
     calculateSum={calcSumCall}
     calculateDifference={calcDifferenceCall}
@@ -115,20 +113,10 @@ it('calc-function returns multiple expected values', () => {
  * Utvid applikasjonen, slik at vi har en knapp som uthenter nåværende dato og tidpsunkt, og viser denne på siden.
  * Her må vi sjekke at det faktisk er et dato-objekt som blir sendt videre fra funksjonen som henter datoen.
  */
-it('date test', () => {
+it('date-function returns a date object', () => {
   render(<App getDate={getDateCall} />)
 
   userEvent.click(screen.getByText(/Get the date/))
 
   expect(getDateCall).toHaveReturnedWith(expect.any(Date))
-})
-
-
-/**
- * Utvid applikasjonen, slik at vi har en knapp som uthenter nåværende dato og tidpsunkt, og viser denne på siden.
- * Her må vi sjekke at det faktisk er et dato-objekt som blir sendt videre fra funksjonen som henter datoen.
- */
-it('date-function returns a date object', () => {
-  // Skriv en test for dato-objekter, og utvid applikasjonen til å ha en knapp som uthenter og viser nåværende dato-tidspunkt
-  throw new Error('Not implemented')
 })

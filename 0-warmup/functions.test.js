@@ -40,19 +40,11 @@ it('sum() returns the sum of the two input variables', () => {
  */
 describe('product()', () => {
   it('returns the product of the two input variables', () => {
-<<<<<<< HEAD
     expect(product(4, 5)).toEqual(20)
   })
   
   it('returns NaN if any of the input variables are not numbers', () => {
     expect(product(4, 'a')).toBeNaN()
-=======
-    throw new Error('Not implemented')
-  })
-  
-  it('returns NaN if any of the input variables are not numbers', () => {
-    throw new Error('Not implemented')
->>>>>>> 6a3cf57... Ch-ch-ch-changes
   })
 })
 
